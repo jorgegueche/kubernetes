@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubermatic-dl-deployment
+#  annotations:
+#    kubectl.kubernetes.io/last-applied-configuration: |
+
+spec:
+  selector:
+    matchLabels:
+      app: kubermatic-dl
+  replicas: 3
+  template:
+    metadata:
+     labels:
+        app: kubermatic-dl
+    spec:
+      containers:
+      - name: kubermatic-dl
+        image: jorgegueche/kubermatic-dl:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: kubermatic-dl-service
+
+#spec:
+#  selector:
+#    app: kubermatic-dl
+#  ports:
+#  - name: http
+#    port: 8080
+#    targetPort: 8080
+#  type: LoadBalancer
+    #  type: ClusterIP
